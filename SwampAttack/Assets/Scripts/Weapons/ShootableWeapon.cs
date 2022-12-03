@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ObjectPool))]
-public class ShotGun : Weapon, IShootable
+public class ShootableWeapon : Weapon
 {
     [SerializeField] private Bullet _bullet;
     [SerializeField] private Transform _shotPoint;
+
     [SerializeField] private int _ammoCapacity;
 
     private ObjectPool _bullets;
 
     private void OnEnable()
     {
-        if (IsBought)
-        {
-            _bullets = GetComponent<ObjectPool>();
+        _bullets = GetComponent<ObjectPool>();
 
-            _bullets.Create(_bullet.gameObject, _ammoCapacity);
-        }
+        _bullets.Create(_bullet.gameObject, _ammoCapacity);
     }
 
     public override void MakeDamage(Vector2 direction)
@@ -35,7 +33,7 @@ public class ShotGun : Weapon, IShootable
         bool isAbleToShoot = _bullets.TryGetObject(out GameObject bullet);
 
         if (isAbleToShoot)
-        {   
+        {
             bullet.transform.position = _shotPoint.position;
             bullet.GetComponent<Bullet>().Init(Damage, direction);
             bullet.SetActive(true);

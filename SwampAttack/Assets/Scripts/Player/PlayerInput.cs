@@ -40,9 +40,9 @@ public class PlayerInput : MonoBehaviour
             _playerMovement.Run((int)_currentDirection);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && _player.WeaponBag.CurrentWeapon.IsBought)
         {
-            _player.CurrentWeapon.MakeDamage(Vector2.right);  
+            _player.WeaponBag.CurrentWeapon.MakeDamage(Vector2.right);  
         }
     }
 

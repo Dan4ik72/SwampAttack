@@ -14,28 +14,34 @@ public class WaveUiController : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawner.OnWaveStarted += ShowProgressBar;
-        _spawner.OnWaveStarted += HideStartNewWaveButton;
-        _spawner.OnWaveEnded += HideProgressBar;
-        _spawner.OnWaveEnded += ShowWaveEndedText;
-        _spawner.OnWaveEnded += HideWaveEndedText;
-        _spawner.OnWaveEnded += ShowStartNewWaveButton;
+        _spawner.OnWaveStarted += OnWaveStarted;
+        _spawner.OnWaveEnded += OnWaveEnded;
     }
 
     private void OnDisable()
     {
-        _spawner.OnWaveStarted -= ShowProgressBar;
-        _spawner.OnWaveStarted -= HideStartNewWaveButton;
-        _spawner.OnWaveEnded -= HideProgressBar;
-        _spawner.OnWaveEnded -= ShowWaveEndedText;
-        _spawner.OnWaveEnded -= HideWaveEndedText;
-        _spawner.OnWaveEnded -= ShowStartNewWaveButton;
+        _spawner.OnWaveStarted -= OnWaveStarted;
+        _spawner.OnWaveEnded -= OnWaveEnded;
     }
 
     private void Start()
     {
         _waveEndedText.gameObject.SetActive(false);
         _waveProgressBar.gameObject.SetActive(false);
+    }
+
+    private void OnWaveStarted()
+    {
+        ShowProgressBar();
+        HideStartNewWaveButton();
+    }
+
+    private void OnWaveEnded()
+    {
+        HideProgressBar();
+        ShowWaveEndedText();
+        HideWaveEndedText();
+        ShowStartNewWaveButton();
     }
 
     private void HideStartNewWaveButton()

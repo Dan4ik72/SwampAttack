@@ -20,23 +20,19 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(_speed * Time.deltaTime * _direction);
+        transform.Translate(_speed * Time.deltaTime * _direction);        
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == _bulletIgnoreLayerNumber)
-        {            
-            Physics2D.IgnoreCollision(collision.collider, collision.otherCollider, true);
-        }
-        else
-        {
-            if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
-            {
-                target.ApplyDamage(_damage);
-            }
+            return;
 
-            gameObject.SetActive(false);    
+        if(collision.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+        {
+            target.ApplyDamage(_damage);
         }
+
+        gameObject.SetActive(false);
     }
 }

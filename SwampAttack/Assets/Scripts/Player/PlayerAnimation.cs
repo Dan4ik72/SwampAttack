@@ -10,15 +10,13 @@ public class PlayerAnimation : MonoBehaviour
 
     private Animator _animator;
     private PlayerInput _playerInput;
-    private Player _player;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _playerInput = GetComponent<PlayerInput>();
-        _player = GetComponent<Player>();
 
-        _player.CurrentWeapon.OnMakeDamage += OnShot;
+        Weapon.OnMakeDamage += OnShot;
     }
 
     private void Update()

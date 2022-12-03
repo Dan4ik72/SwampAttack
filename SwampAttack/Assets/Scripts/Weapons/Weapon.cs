@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public event UnityAction OnMakeDamage;
+    public static event UnityAction OnMakeDamage;
 
     [SerializeField] private string _lable;
     [SerializeField] private int _damage;
@@ -17,12 +17,15 @@ public abstract class Weapon : MonoBehaviour
 
     private float _shotTimer;
 
+    public string Lable => _lable;
+    public int Price => _price;
+    public Sprite Icon => _icon;
+
     public float TimeBetweenShots => _timeBetweenShots;
-
-    public bool IsAbleToMakeDamage => _shotTimer > _timeBetweenShots;
-    protected bool IsBought => _isBought;
+    public bool IsBought => _isBought;
+    public bool IsAbleToMakeDamage => _shotTimer > _timeBetweenShots;    
     protected int Damage => _damage;
-
+       
     private void Update()
     {
         _shotTimer += Time.deltaTime;
@@ -32,6 +35,11 @@ public abstract class Weapon : MonoBehaviour
     {
         OnMakeDamage?.Invoke();
         _shotTimer = 0;                
+    }
+
+    public void SetBought()
+    {
+        _isBought = true;
     }
 }
 

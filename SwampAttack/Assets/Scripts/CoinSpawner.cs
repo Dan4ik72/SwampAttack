@@ -23,7 +23,7 @@ public class CoinSpawner : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            var createdCoin = Instantiate(_coinTemplate, spawnPosition, Quaternion.identity);
+            var createdCoin = Instantiate(_coinTemplate, spawnPosition, Quaternion.identity, transform);
 
             PushCoin(createdCoin);
 

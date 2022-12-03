@@ -9,12 +9,13 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField] private int _health;
 
-    [SerializeField] private Weapon _currentWeapon;
     [SerializeField] private Wallet _wallet;
+    [SerializeField] private WeaponBag _weaponBag;
 
     private int _maxHealth = 100;
 
-    public Weapon CurrentWeapon => _currentWeapon;
+    public WeaponBag WeaponBag => _weaponBag;
+    public Wallet Wallet => _wallet;
     public bool IsDead => _health <= 0;
     public int MaxHealth => _maxHealth;
     
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour, IDamageable
 
         OnHealthChanged?.Invoke(_health);
     }
-
+    
     private void Die()
     {
         Destroy(gameObject);
